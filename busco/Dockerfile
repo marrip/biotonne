@@ -1,4 +1,5 @@
 FROM ubuntu:18.04 as download
+MAINTAINER martin.rippin@helse-bergen.no
 # Install git
 RUN apt-get update && apt-get install -y git
 # Clone augustus repository
@@ -25,4 +26,3 @@ WORKDIR /busco
 RUN python setup.py install
 
 CMD ["/bin/bash"]
-
