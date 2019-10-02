@@ -6,4 +6,4 @@ This repository contains Dockerfiles and additional files to build a bunch of bi
 
 ## BUSCO 3.0.2
 
-The current version of BUSCO is 3.0.2. To use the docker image, you need to download the required databases from the BUSCO website ([https://busco.ezlab.org/](https://busco.ezlab.org/)).
+The current version of BUSCO is 3.0.2. To use the docker image, you need to download the required databases from the BUSCO website ([https://busco.ezlab.org/](https://busco.ezlab.org/)). At the moment, the docker image does not support plotting.
