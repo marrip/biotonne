@@ -1,0 +1,67 @@
+#!/bin/bash
+
+# Setup env
+IFLAG=false
+OFLAG=false
+CFLAG=false
+VERSION=3.13.1
+IMAGE=myskmadra/spades
+
+# Define help
+usage () { 
+	printf "Wrapper for SPAdes genome assembler $VERSION\\n\\nPlease specify:\n-i\tInput directory with ALL files to read\n-o\tOutput directory for the generated files to be stored\n-c\tSpades command flags according to specifications below. DO NOT SPECIFY ANY PATHS, ONLY FILE NAMES! OMIT -o flag here.\n-h\tDisplay this help\n\nEXAMPLE\t\$spades -i /Path/to/input -o /Path/for/output -c \"-s Reads.fastq\"\n\n----------------\n\n";
+	sudo docker run -it --rm $IMAGE:$VERSION bash -c "spades.py";
+}
+
+# Read flags
+while getopts 'i:o:c:h' OPTION; do
+    case $OPTION in
+    i)
+	IFLAG=true;
+        INPUT="$OPTARG"
+	;;
+    o)
+	OFLAG=true;
+        OUTPUT="$OPTARG"
+	;;
+    c)
+	CFLAG=true;
+        CMD="$OPTARG"
+	;;
+    h)
+	usage;
+	exit
+	;;
+    :)
+	echo "Missing option argument for -$OPTARG" >&2;
+	exit 1
+	;;
+    *)
+        echo "Incorrect options provided";
+	usage;
+        exit 1
+        ;;
+    esac
+done
+
+# Check if required options are provided
+if ! $IFLAG && ! $OFLAG && ! $CFLAG; then
+	echo "Please specify all options";
+	usage;
+	exit 1;
+fi
+
+# Check if spades option -o is defined
+if [[ $CMD == *"-o "* ]]; then
+	echo "! Spades option -o defined. Please omit this option.";
+	usage;
+	exit 1;
+fi
+
+# Display version
+sudo docker run -it --rm $IMAGE:$VERSION bash -c "spades.py --version";
+
+# Run spades in container
+#ALL_CMD="spades.py -o /output $CMD"
+#echo $ALL_CMD
+sudo docker run -it --rm -v $INPUT:/input -v $OUTPUT:/output -w="/input" $IMAGE:$VERSION bash -c "spades.py -o /output $CMD";
