@@ -1,0 +1,53 @@
+#!/bin/bash
+
+# Setup env
+IFLAG=false
+OFLAG=false
+TOOL=minionqc
+IMAGE=myskmadra/minionqc
+VERSION=master
+
+# Define help
+usage () { 
+	printf "Wrapper for MinIONQC $VERSION\\n\\nPlease specify:\n-i\tInput directory with ALL files to read\n-o\tOutput directory for the generated files to be stored\n-h\tDisplay this help\n\nEXAMPLE\t\$$TOOL -i /Path/to/input -o /Path/for/output\"\n\n";
+}
+
+# Read flags
+while getopts 'i:o:h' OPTION; do
+    case $OPTION in
+    i)
+	IFLAG=true;
+        INPUT="$OPTARG"
+	;;
+    o)
+	OFLAG=true;
+        OUTPUT="$OPTARG"
+	;;
+    h)
+	usage;
+	exit
+	;;
+    :)
+	echo "Missing option argument for -$OPTARG" >&2;
+	exit 1
+	;;
+    *)
+        echo "Incorrect options provided";
+	usage;
+        exit 1
+        ;;
+    esac
+done
+
+# Check if required options are provided
+if ! $IFLAG & ! $OFLAG; then
+	echo "Please specify all options";
+	usage;
+	exit 1;
+fi
+
+# Display info before starting container
+printf "Starting $TOOL with $INPUT as input and $OUTPUT as output. Please use the directories /input (mapped to $INPUT) and /output (mapped to $OUTPUT) for your file paths.\n$TOOL is a Rscript and can be called like this:\n\n\$Rscript /RScripts/MinIONQC.R [options]\n\nTo Leave $TOOL, simply call \"exit\".\n\n"
+
+# Run tool in container
+sudo docker run -it --rm -v $INPUT:/input -v $OUTPUT:/output -w="/input" $IMAGE:$VERSION bash;
