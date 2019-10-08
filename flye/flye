@@ -13,7 +13,7 @@ usage () {
 }
 
 # Read flags
-while getopts 'i:o:c:h' OPTION; do
+while getopts 'i:o:h' OPTION; do
     case $OPTION in
     i)
 	IFLAG=true;
