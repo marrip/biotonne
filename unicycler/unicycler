@@ -1,0 +1,56 @@
+#!/bin/bash
+
+# Setup env
+IFLAG=false
+OFLAG=false
+TOOL=unicycler
+IMAGE=ttubb/unicycler
+VERSION=latest
+
+# Define help
+usage () { 
+	printf "Wrapper for Unicycler assembly pipeline $VERSION\\n\\nPlease specify:\n-i\tInput directory with ALL files to read\n-o\tOutput directory for the generated files to be stored\n-h\tDisplay this help\n\nEXAMPLE\t\$$TOOL -i /Path/to/input -o /Path/for/output\"\n\n";
+}
+
+# Read flags
+while getopts 'i:o:h' OPTION; do
+    case $OPTION in
+    i)
+	IFLAG=true;
+        INPUT="$OPTARG"
+	;;
+    o)
+	OFLAG=true;
+        OUTPUT="$OPTARG"
+	;;
+    h)
+	usage;
+	exit
+	;;
+    :)
+	echo "Missing option argument for -$OPTARG" >&2;
+	exit 1
+	;;
+    *)
+        echo "Incorrect options provided";
+	usage;
+        exit 1
+        ;;
+    esac
+done
+
+# Check if required options are provided
+if ! $IFLAG & ! $OFLAG; then
+	echo "Please specify all options";
+	usage;
+	exit 1;
+fi
+
+# Display info before starting container
+printf "Starting $TOOL with $INPUT as input and $OUTPUT as output. Please use the directories /input (mapped to $INPUT) and /output (mapped to $OUTPUT) for your file paths.\nTo Leave $TOOL, simply call \"exit\".\n"
+
+# Display version
+sudo docker run -it --rm $IMAGE:$VERSION bash -c "unicycler --version";
+
+# Run tool in container
+sudo docker run -it --rm -v $INPUT:/input -v $OUTPUT:/output -w="/input" $IMAGE:$VERSION;
