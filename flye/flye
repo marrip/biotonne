@@ -8,6 +8,7 @@ TOOL_NAME="Flye assembler"
 IMAGE=myskmadra/flye
 VERSION=2.6
 CMD=flye
+REPO_PATH=/home/marrip/Documents/git_repos/biotonne
 
 # Define help
 usage () { 
@@ -44,6 +45,11 @@ while getopts 'i:o:vh' OPTION; do
         ;;
     esac
 done
+
+# Check for update
+if git diff origin/master $REPO_PATH/$TOOL/$TOOL | grep -q "git --diff"; then
+	echo "Found newer version";
+fi
 
 # Check if required options are provided
 if ! $IFLAG & ! $OFLAG; then
