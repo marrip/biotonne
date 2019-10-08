@@ -3,14 +3,13 @@
 # Setup env
 IFLAG=false
 OFLAG=false
-CFLAG=false
-VERSION=3.13.1
+TOOL=spades
 IMAGE=myskmadra/spades
+VERSION=3.13.1
 
 # Define help
 usage () { 
-	printf "Wrapper for SPAdes genome assembler $VERSION\\n\\nPlease specify:\n-i\tInput directory with ALL files to read\n-o\tOutput directory for the generated files to be stored\n-c\tSpades command flags according to specifications below. DO NOT SPECIFY ANY PATHS, ONLY FILE NAMES! OMIT -o flag here.\n-h\tDisplay this help\n\nEXAMPLE\t\$spades -i /Path/to/input -o /Path/for/output -c \"-s Reads.fastq\"\n\n----------------\n\n";
-	sudo docker run -it --rm $IMAGE:$VERSION bash -c "spades.py";
+	printf "Wrapper for SPAdes genome assembler $VERSION\\n\\nPlease specify:\n-i\tInput directory with ALL files to read\n-o\tOutput directory for the generated files to be stored\n-h\tDisplay this help\n\nEXAMPLE\t\$$TOOL -i /Path/to/input -o /Path/for/output\"\n\n";
 }
 
 # Read flags
@@ -23,10 +22,6 @@ while getopts 'i:o:c:h' OPTION; do
     o)
 	OFLAG=true;
         OUTPUT="$OPTARG"
-	;;
-    c)
-	CFLAG=true;
-        CMD="$OPTARG"
 	;;
     h)
 	usage;
@@ -45,23 +40,17 @@ while getopts 'i:o:c:h' OPTION; do
 done
 
 # Check if required options are provided
-if ! $IFLAG && ! $OFLAG && ! $CFLAG; then
+if ! $IFLAG && ! $OFLAG; then
 	echo "Please specify all options";
 	usage;
 	exit 1;
 fi
 
-# Check if spades option -o is defined
-if [[ $CMD == *"-o "* ]]; then
-	echo "! Spades option -o defined. Please omit this option.";
-	usage;
-	exit 1;
-fi
+# Display info before starting container
+printf "Starting $TOOL with $INPUT as input and $OUTPUT as output. Please use the directories /input (mapped to $INPUT) and /output (mapped to $OUTPUT) for your file paths.\nTo Leave $TOOL, simply call \"exit\".\n"
 
 # Display version
 sudo docker run -it --rm $IMAGE:$VERSION bash -c "spades.py --version";
 
-# Run spades in container
-#ALL_CMD="spades.py -o /output $CMD"
-#echo $ALL_CMD
-sudo docker run -it --rm -v $INPUT:/input -v $OUTPUT:/output -w="/input" $IMAGE:$VERSION bash -c "spades.py -o /output $CMD";
+# Run tool in container
+sudo docker run -it --rm -v $INPUT:/input -v $OUTPUT:/output -w="/input" $IMAGE:$VERSION;
