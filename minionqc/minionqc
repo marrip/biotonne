@@ -4,12 +4,13 @@
 IFLAG=false
 OFLAG=false
 TOOL=minionqc
+TOOL_NAME="MinIONQC"
 IMAGE=myskmadra/minionqc
 VERSION=master
 
 # Define help
 usage () { 
-	printf "Wrapper for MinIONQC $VERSION\\n\\nPlease specify:\n-i\tInput directory with ALL files to read\n-o\tOutput directory for the generated files to be stored\n-h\tDisplay this help\n\nEXAMPLE\t\$$TOOL -i /Path/to/input -o /Path/for/output\"\n\n";
+	printf "Wrapper for $TOOL_NAME $VERSION\\n\\nPlease specify:\n-i\tInput directory with ALL files to read\n-o\tOutput directory for the generated files to be stored\n-h\tDisplay this help\n\nEXAMPLE\t\$$TOOL -i /Path/to/input -o /Path/for/output\"\n\n";
 }
 
 # Read flags

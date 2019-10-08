@@ -4,16 +4,18 @@
 IFLAG=false
 OFLAG=false
 TOOL=flye
+TOOL_NAME="Flye assembler"
 IMAGE=myskmadra/flye
 VERSION=2.6
+CMD=flye
 
 # Define help
 usage () { 
-	printf "Wrapper for Flye assembler $VERSION\\n\\nPlease specify:\n-i\tInput directory with ALL files to read\n-o\tOutput directory for the generated files to be stored\n-h\tDisplay this help\n\nEXAMPLE\t\$$TOOL -i /Path/to/input -o /Path/for/output\"\n\n";
+	printf "Wrapper for $TOOL_NAME $VERSION\\n\\nPlease specify:\n-i\tInput directory with ALL files to read\n-o\tOutput directory for the generated files to be stored\n-v\tDisplay version\n-h\tDisplay this help\n\nEXAMPLE\t\$$TOOL -i /Path/to/input -o /Path/for/output\"\n\n";
 }
 
 # Read flags
-while getopts 'i:o:h' OPTION; do
+while getopts 'i:o:vh' OPTION; do
     case $OPTION in
     i)
 	IFLAG=true;
@@ -22,6 +24,10 @@ while getopts 'i:o:h' OPTION; do
     o)
 	OFLAG=true;
         OUTPUT="$OPTARG"
+	;;
+    v)
+	sudo docker run -it --rm $IMAGE:$VERSION bash -c "$CMD --version";
+	exit
 	;;
     h)
 	usage;
@@ -41,7 +47,7 @@ done
 
 # Check if required options are provided
 if ! $IFLAG & ! $OFLAG; then
-	echo "Please specify all options";
+	echo "Please specify all required options";
 	usage;
 	exit 1;
 fi
@@ -50,7 +56,7 @@ fi
 printf "Starting $TOOL with $INPUT as input and $OUTPUT as output. Please use the directories /input (mapped to $INPUT) and /output (mapped to $OUTPUT) for your file paths.\nTo Leave $TOOL, simply call \"exit\".\n"
 
 # Display version
-sudo docker run -it --rm $IMAGE:$VERSION bash -c "flye --version";
+sudo docker run -it --rm $IMAGE:$VERSION bash -c "$CMD --version";
 
 # Run tool in container
 sudo docker run -it --rm -v $INPUT:/input -v $OUTPUT:/output -w="/input" $IMAGE:$VERSION;
