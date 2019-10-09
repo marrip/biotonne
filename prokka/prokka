@@ -32,7 +32,7 @@ update () {
 }
 
 # Read flags
-while getopts 'i:o:r:h' OPTION; do
+while getopts 'i:o:r:vh' OPTION; do
     case $OPTION in
     i)
 	IFLAG=true;
