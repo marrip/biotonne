@@ -24,5 +24,6 @@ COPY --from=download /busco /busco
 ADD config.ini /busco/config/
 WORKDIR /busco
 RUN python setup.py install
+RUN ln -s /busco/scripts/run_BUSCO.py /usr/local/bin/run_BUSCO.py
 
 CMD ["/bin/bash"]
