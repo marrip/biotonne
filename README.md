@@ -3,7 +3,7 @@
 This repository contains Dockerfiles and additional files to build a bunch of bioinformatic tools useful for NGS data analysis. The dockerzied tools are available on dockerhub ([https://hub.docker.com/u/myskmadra](https://hub.docker.com/u/myskmadra)). The following tools are available:
 
 - BUSCO 3.0.2
-- FastQC 0.11.8
+- FastQC 0.11.5
 - Flye 2.6
 - MinIONQC
 - Prokka 1.14.1
@@ -15,7 +15,7 @@ The current version of BUSCO is 3.0.2. To use the docker image, you need to down
 
 ## FastQC 0.11.8
 
-The current version of FastQC is 0.11.8.
+The current version of FastQC is 0.11.5.
 
 ## Flye 2.6
 
