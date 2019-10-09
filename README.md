@@ -5,9 +5,11 @@ This repository contains Dockerfiles and additional files to build a bunch of bi
 - BUSCO 3.0.2
 - FastQC 0.11.5
 - Flye 2.6
+- Guppy 3.1.5
 - MinIONQC
 - Prokka 1.14.1
 - SPAdes 3.13.1
+- QUAST 5.0.2 
 
 ## BUSCO 3.0.2
 
@@ -21,6 +23,10 @@ The current version of FastQC is 0.11.5.
 
 The current version of Flye is 2.6.
 
+## Guppy 3.1.5
+
+The current version of Guppy 3.1.5.
+
 ## MinIONQC
 
 MinIONQC is not versionized. It is a simple R script run in comimand line.
@@ -32,3 +38,7 @@ The current version of Prokka is 1.14.1.
 ## SPAdes 3.13.1
 
 The current version of SPAdes is 3.13.1.
+
+## QUAST 5.0.2
+
+The current version of QUAST is 5.0.2.
