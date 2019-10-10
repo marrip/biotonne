@@ -2,14 +2,20 @@
 
 This repository contains Dockerfiles and additional files to build a bunch of bioinformatic tools useful for NGS data analysis. The dockerzied tools are available on dockerhub ([https://hub.docker.com/u/myskmadra](https://hub.docker.com/u/myskmadra)). The following tools are available:
 
+- ABRicate 0.9.8
 - BUSCO 3.0.2
 - FastQC 0.11.5
 - Flye 2.6
 - Guppy 3.1.5
 - MinIONQC
 - Prokka 1.14.1
-- SPAdes 3.13.1
 - QUAST 5.0.2 
+- SPAdes 3.13.1
+- Unicycler 0.4.7
+
+## ABRicate 0.9.8
+
+The current version of ABRicate is 0.9.8.
 
 ## BUSCO 3.0.2
 
@@ -35,10 +41,14 @@ MinIONQC is not versionized. It is a simple R script run in comimand line.
 
 The current version of Prokka is 1.14.1.
 
+## QUAST 5.0.2
+
+The current version of QUAST is 5.0.2.
+
 ## SPAdes 3.13.1
 
 The current version of SPAdes is 3.13.1.
 
-## QUAST 5.0.2
+## Unicycler 0.4.7
 
-The current version of QUAST is 5.0.2.
+The current version Unicycler is 0.4.7.
