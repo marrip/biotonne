@@ -1,0 +1,48 @@
+#!/bin/bash
+# Define env
+IMAGE=myskmadra/spades:3.13.1
+
+# Define help
+usage () { 
+	printf "Wrapper to assemble multiple genomes using spades\\n\\nPlease specify:\n-i\tInput files, comma separated\n-v\tDisplay version\n-h\tDisplay this help\n\nEXAMPLE\t\$$TOOL -i /Path/to/input1,/Path/to/input2\n\n";
+}
+
+# Define realpath
+realpath () {
+  echo $(cd $(dirname $1); pwd); 
+}
+
+# Read flags
+while getopts 'i:vh' OPTION; do
+    case $OPTION in
+    i)
+        INPUT="$OPTARG"
+	;;
+    v)
+	sudo docker run -it --rm $IMAGE spades.py --version;
+	exit
+	;;
+    h)
+	usage;
+	exit
+	;;
+    :)
+	echo "Missing option argument for -$OPTARG" >&2;
+	exit 1
+	;;
+    *)
+        echo "Incorrect options provided";
+	usage;
+        exit 1
+        ;;
+    esac
+done
+
+# Split input list
+IFS=',' read -r -a files <<< "$INPUT";
+
+# Run spades on each file individually
+for file in "${files[@]}"; do
+  vol=$(realpath $file);
+  sudo docker run -it --rm -v $vol:/data -w="/data" $IMAGE bash -c "spades.py -s $(basename $file) -o . --careful";
+done
