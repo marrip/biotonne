@@ -10,6 +10,7 @@ This repository contains Dockerfiles and additional files to build a bunch of bi
 - MinIONQC
 - Prokka 1.14.1
 - QUAST 5.0.2 
+- Racon 1.4.7
 - SPAdes 3.13.1
 - Unicycler 0.4.7
 
@@ -44,6 +45,10 @@ The current version of Prokka is 1.14.1.
 ## QUAST 5.0.2
 
 The current version of QUAST is 5.0.2.
+
+## Racon 1.4.7
+
+The current version of Racon is 1.4.7.
 
 ## SPAdes 3.13.1
 
