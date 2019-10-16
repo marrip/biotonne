@@ -1,17 +1,3 @@
-#!/bin/bash
-
-# Setup env
-IFLAG=false
-OFLAG=false
-REPO_PATH=/home/marrip/Documents/git_repos/biotonne
-USER_PATH=$(pwd)
-TOOL=busco
-TOOL_NAME="Benchmarking Universal Single-Copy Orthologs"
-IMAGE=myskmadra/busco
-VERSION=3.0.2
-CMD=run_BUSCO.py
-
-
 # Define help
 usage () { 
 	printf "Wrapper for $TOOL_NAME $VERSION\\n\\nPlease specify:\n-i\tInput directory with ALL files to read (REQUIRED)\n-o\tOutput directory for the generated files to be stored (REQUIRED)\n-r\tDirectory containing reference (Optional)\n-v\tDisplay version\n-h\tDisplay this help\n\nEXAMPLE\t\$$TOOL -i /Path/to/input -o /Path/for/output -r /Path/to/reference\n\n";

@@ -3,17 +3,18 @@
 # Setup env
 IFLAG=false
 OFLAG=false
+REPO_PATH=/home/marrip/Documents/git_repos/biotonne
+USER_PATH=$(pwd)
 TOOL=flye
 TOOL_NAME="Flye assembler"
 IMAGE=myskmadra/flye
 VERSION=2.6
 CMD=flye
-REPO_PATH=/home/marrip/Documents/git_repos/biotonne
-USER_PATH=$(pwd)
+
 
 # Define help
 usage () { 
-	printf "Wrapper for $TOOL_NAME $VERSION\\n\\nPlease specify:\n-i\tInput directory with ALL files to read\n-o\tOutput directory for the generated files to be stored\n-v\tDisplay version\n-h\tDisplay this help\n\nEXAMPLE\t\$$TOOL -i /Path/to/input -o /Path/for/output\"\n\n";
+	printf "Wrapper for $TOOL_NAME $VERSION\\n\\nPlease specify:\n-i\tInput directory with ALL files to read (REQUIRED)\n-o\tOutput directory for the generated files to be stored (REQUIRED)\n-v\tDisplay version\n-h\tDisplay this help\n\nEXAMPLE\t\$$TOOL -i /Path/to/input -o /Path/for/output\"\n\n";
 }
 
 # Define update
@@ -73,7 +74,7 @@ if ! $IFLAG & ! $OFLAG; then
 fi
 
 # Display info before starting container
-printf "Starting $TOOL with $INPUT as input and $OUTPUT as output. Please use the directories /input (mapped to $INPUT) and /output (mapped to $OUTPUT) for your file paths.\nTo Leave $TOOL, simply call \"exit\".\n";
+printf "Starting $TOOL with $INPUT as input and $OUTPUT as output.\n\n------------\n\nHINT 1\tPlease use the directories /input (mapped to $INPUT) and /output (mapped to $OUTPUT) for your file paths.\n\nHINT 2\tTo Leave $TOOL, simply call \"exit\".\n\n------------\n\n";
 
 # Display version
 sudo docker run -it --rm $IMAGE:$VERSION bash -c "$CMD --version";
