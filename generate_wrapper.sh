@@ -2,7 +2,7 @@
 
 # Define tool list
 TWOR=( fastqc flye guppy mlst racon spades unicycler )
-TWR=( abricate busco prokka quast )
+TWR=( abricate busco kmerfinder prokka quast )
 
 # Define wrapping function
 wrapping () {
