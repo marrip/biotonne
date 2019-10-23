@@ -10,6 +10,7 @@ This repository contains Dockerfiles and additional files to build a bunch of bi
 - KmerFinder 3.0.2
 - MinIONQC
 - mlst 2.17.6
+- POCP
 - Prokka 1.14.1
 - QUAST 5.0.2 
 - Racon 1.4.7
