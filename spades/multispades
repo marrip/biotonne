@@ -1,22 +1,32 @@
 #!/bin/bash
 # Define env
 IMAGE=myskmadra/spades:3.13.1
+IFLAG=false;
+ONEFLAG=false;
+TWOFLAG=false;
+
+# Display welcome message
+printf "\n---------------------------\n\nWELCOME TO MULTISPADES\n\n---------------------------\n\nWrapper to assemble multiple genomes using SPAdes. The tool will start a docker container with spades for each read pair (list should be in right order) and leave the assembly in input folder. No need to exit the container afterwards.\n"
 
 # Define help
 usage () { 
-	printf "Wrapper to assemble multiple genomes using spades\\n\\nPlease specify:\n-i\tInput files, comma separated\n-v\tDisplay version\n-h\tDisplay this help\n\nEXAMPLE\t\$$TOOL -i /Path/to/input1,/Path/to/input2\n\n";
-}
-
-# Define realpath
-realpath () {
-  echo $(cd $(dirname $1); pwd); 
+  printf "\nPlease specify:\n-i\tInput folder, containing ALL read files (REQUIRED)\n-1\tcomma separated list of input file names containg forward reads (R1) (REQUIRED)\n-2\tcomma separated list of input file names containg reverse reads (R2) (REQUIRED)\n-v\tDisplay version\n-h\tDisplay this help\n\nEXAMPLE\t\$$TOOL -i /Path/to/input/folder -1 file1_R1.fastq,file2_R1.fastq -2 file1_R2.fastq,file2_R2.fastq\n\n";
 }
 
 # Read flags
-while getopts 'i:vh' OPTION; do
+while getopts 'i:1:2:vh' OPTION; do
     case $OPTION in
     i)
+        IFLAG=true;
         INPUT="$OPTARG"
+	;;
+    1)  
+        ONEFLAG=true;
+        R1="$OPTARG"
+	;;
+    2)
+        TWOFLAG=true;
+        R2="$OPTARG"
 	;;
     v)
 	sudo docker run -it --rm $IMAGE spades.py --version;
@@ -38,11 +48,26 @@ while getopts 'i:vh' OPTION; do
     esac
 done
 
+# Check if required options are provided
+if ! $IFLAG & ! $ONEFLAG & ! $TWOFLAG; then
+	printf "\nERROR: Please specify all required options\n";
+	usage;
+	exit 1;
+fi
+
 # Split input list
-IFS=',' read -r -a files <<< "$INPUT";
+IFS=',' read -r -a files1 <<< "$R1";
+IFS=',' read -r -a files2 <<< "$R2";
+
+# Check if lists have same length
+if [ ${#files1[@]} != ${#files2[@]} ]; then
+  printf "\nERROR: Input lists have different lengths\n";
+  usage;
+  exit 1;
+fi
 
 # Run spades on each file individually
-for file in "${files[@]}"; do
-  vol=$(realpath $file);
-  sudo docker run -it --rm -v $vol:/data -w="/data" $IMAGE bash -c "spades.py -s $(basename $file) -o . --careful";
+LEN=$((${#files1[@]} - 1))
+for i in $(seq 0 $LEN); do
+  sudo docker run -it --rm -v $INPUT:/data -w="/data" $IMAGE bash -c "spades.py -1 "${files1[$i]}" -2 "${files2[$i]}" -o . --careful";
 done
