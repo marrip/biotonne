@@ -3,7 +3,7 @@
 # Setup env
 IFLAG=false
 OFLAG=false
-REPO_PATH=/home/marrip/Documents/git_repos/biotonne
+REPO_PATH=
 USER_PATH=$(pwd)
 TOOL=prokka
 TOOL_NAME="Prokka - rapid prokaryotic genome annotation"
