@@ -1,6 +1,6 @@
 # Biotonne
 
-This repository contains Dockerfiles and additional files to build a bunch of bioinformatic tools useful for NGS data analysis. The dockerzied tools are available on dockerhub ([https://hub.docker.com/u/myskmadra](https://hub.docker.com/u/myskmadra)). Additionally, a wrapper script is provided for each tool. These scripts should enable users, unfamiliar with docker, to run the scripts. The following tools are available:
+This repository contains Dockerfiles and additional files to build a bunch of bioinformatic tools useful for NGS data analysis. The dockerzied tools are available on dockerhub ([https://hub.docker.com/u/myskmadra](https://hub.docker.com/u/myskmadra)). Additionally, a wrapper script is provided for each tool. These scripts should enable users, unfamiliar with docker, to run the tools. The following tools are available:
 
 - ABRicate 0.9.8
 - BUSCO 3.0.2
