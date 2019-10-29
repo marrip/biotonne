@@ -1,6 +1,6 @@
 # Biotonne
 
-This repository contains Dockerfiles and additional files to build a bunch of bioinformatic tools useful for NGS data analysis. The dockerzied tools are available on dockerhub ([https://hub.docker.com/u/myskmadra](https://hub.docker.com/u/myskmadra)). The following tools are available:
+This repository contains Dockerfiles and additional files to build a bunch of bioinformatic tools useful for NGS data analysis. The dockerzied tools are available on dockerhub ([https://hub.docker.com/u/myskmadra](https://hub.docker.com/u/myskmadra)). Additionally, a wrapper script is provided for each tool. These scripts should enable users, unfamiliar with docker, to run the scripts. The following tools are available:
 
 - ABRicate 0.9.8
 - BUSCO 3.0.2
@@ -16,6 +16,10 @@ This repository contains Dockerfiles and additional files to build a bunch of bi
 - Racon 1.4.7
 - SPAdes 3.13.1
 - Unicycler 0.4.7
+
+To allow an easy update of the wrappers, the script *generate_wrapper.sh* was written which automatically writes the tool script files. It uses twor.spec, for tools without reference, and twr.spec, for tools with reference. Additional parameters are defined for each tool in *tool/conf.spec*. New tools need to be added to the appropriate array in *generate_wrapper.sh*.
+
+*MinIONQC is not part of the automated wrapper generation.*
 
 ## BUSCO 3.0.2
 
