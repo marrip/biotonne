@@ -10,7 +10,7 @@ wrapping () {
   shift;
   local ARR=("$@");
   for tool in "${ARR[@]}"; do
-    printf "#!/bin/bash\n\n# Setup env\nIFLAG=false\nOFLAG=false\nREPO_PATH=\nUSER_PATH=\$(pwd)\n" > $tool/$tool;
+    printf "#!/bin/bash\n\n# Setup env\nIFLAG=false\nOFLAG=false\nREPO_PATH=$(pwd)\nUSER_PATH=\$(pwd)\n" > $tool/$tool;
     cat $tool/conf.spec >> $tool/$tool;
     printf "\n\n" >> $tool/$tool;
     cat $SPEC >> $tool/$tool;
