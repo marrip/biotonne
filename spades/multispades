@@ -69,5 +69,5 @@ fi
 # Run spades on each file individually
 LEN=$((${#files1[@]} - 1))
 for i in $(seq 0 $LEN); do
-  sudo docker run -it --rm -v $INPUT:/data -w="/data" $IMAGE bash -c "spades.py -1 "${files1[$i]}" -2 "${files2[$i]}" -o . --careful";
+  sudo docker run -it --rm -v $INPUT:/data -w="/data" $IMAGE bash -c "mkdir -p "${files1[$i]}_output" && spades.py -1 "${files1[$i]}" -2 "${files2[$i]}" -o ./"${files1[$i]}_output" --careful";
 done
