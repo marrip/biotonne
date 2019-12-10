@@ -8,6 +8,7 @@ This repository contains Dockerfiles and additional files to build a bunch of bi
 - Flye 2.6
 - Guppy 3.1.5
 - KmerFinder 3.0.2
+- LRE-Finder 1.0.0
 - Kraken 2.0.8-beta
 - MinIONQC
 - mlst 2.17.6
