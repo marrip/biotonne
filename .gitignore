@@ -1,1 +1,16 @@
 mlst/ncbi-blast-2.9.0+
+abricate/abricate
+busco/busco
+fastqc/fastqc
+flye/flye
+guppy/guppy
+kmerfinder/kmerfinder
+kraken/kraken
+lre-finder/lre-finder
+mlst/mlst
+pocp/pocp
+prokka/prokka
+quast/quast
+racon/racon
+spades/spades
+unicycler/unicycler
