@@ -1,5 +1,4 @@
 FROM ubuntu:18.04
-MAINTAINER martin.rippin@helse-bergen.no
 # Install dependencies
 RUN apt-get update && apt-get install -y python wget
 # Download spades
