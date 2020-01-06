@@ -8,8 +8,8 @@ This repository contains Dockerfiles and additional files to build a bunch of bi
 - Flye 2.6
 - Guppy 3.1.5
 - KmerFinder 3.0.2
-- LRE-Finder 1.0.0
 - Kraken 2.0.8-beta
+- LRE-Finder 1.0.0
 - MinIONQC
 - mlst 2.17.6
 - POCP
@@ -17,7 +17,7 @@ This repository contains Dockerfiles and additional files to build a bunch of bi
 - QUAST 5.0.2 
 - Racon 1.4.7
 - SPAdes 3.13.1
-- Unicycler 0.4.7
+- Unicycler 0.4.8
 
 To allow an easy update of the wrappers, the script *generate_wrapper.sh* was written which automatically writes the tool script files. It uses twor.spec, for tools without reference, and twr.spec, for tools with reference. Additional parameters are defined for each tool in *tool/conf.spec*. New tools need to be added to the appropriate array in *generate_wrapper.sh*.
 
