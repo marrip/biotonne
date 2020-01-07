@@ -19,7 +19,8 @@ RUN wget $SPADES_URL/$SPADES_FILE.tar.gz && \
 # Install spades
 RUN tar -xzf $SPADES_FILE.tar.gz && \
     mv /$SPADES_FILE/bin/* /usr/local/bin/ && \
-    rm -rf $SPADES_FILE.tar.gz /$SPADES_FILE
+    mv /$SPADES_FILE/share/* /usr/local/share/ && \
+    rm -rf $SPADES_FILE.tar.gz
 # Install racon
 WORKDIR /racon/build
 RUN cmake -DCMAKE_BUILD_TYPE=Release .. && \
