@@ -12,4 +12,7 @@ RUN apt-get update && apt-get install -y default-jdk
 COPY --from=base /Trimmomatic-0.39/trimmomatic-0.39.jar /usr/local/bin/
 COPY --from=base /Trimmomatic-0.39/adapters /home/adapters/
 
+RUN groupadd -r ngs && \
+    useradd -r -g ngs ngs
+
 CMD ["/bin/bash"]
