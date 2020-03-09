@@ -24,7 +24,7 @@ This repository contains Dockerfiles and additional files to build a bunch of bi
 
 To allow an easy update of the wrappers, the script *generate_wrapper.sh* was written which automatically writes the tool script files. It uses twor.spec, for tools without reference, and twr.spec, for tools with reference. Additional parameters are defined for each tool in *tool/conf.spec*. New tools need to be added to the appropriate array in *generate_wrapper.sh*.
 
-*MinIONQC is not part of the automated wrapper generation.*
+*MinIONQC is not part of the automated wrapper generation. Furthermore, Bowtie, pipe4C and Trimmomatic are not wrapped at all.*
 
 ## BUSCO 3.0.2
 
