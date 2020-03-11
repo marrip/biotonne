@@ -7,7 +7,7 @@ ADD install.R /RScripts
 RUN Rscript /RScripts/install.R
 # Clone pipe4C
 ENV PIPE4C_REPO=https://github.com/deLaatLab/pipe4C.git \
-    PIPE4C_SHA=3befc6cd6a2cc773c23ef35178c7f96be9df9727
+    PIPE4C_SHA=e03e8f6eadb0efb9b580828d338c136516562b4e
 RUN git clone $PIPE4C_REPO /RScripts/pipe4C
 WORKDIR /RScripts/pipe4C
 RUN git checkout $PIPE4C_SHA
