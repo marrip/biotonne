@@ -3,7 +3,7 @@ FROM r-base:3.6.2
 RUN apt-get update && apt-get install -y git libcurl4-gnutls-dev libxml2-dev libssl-dev bowtie2 samtools
 # Install R packages
 RUN mkdir /RScripts
-ADD install.R /RScripts
+ADD install.R conf_generator.R /RScripts/
 RUN Rscript /RScripts/install.R
 # Clone pipe4C
 ENV PIPE4C_REPO=https://github.com/deLaatLab/pipe4C.git \
