@@ -8,9 +8,8 @@ getRDSFileNames <- function() {
   return(list(path = args[1], fileNames = list.files(args[1])))
 }
 
-mkDir <- function(path) {
-  folders <- strsplit(path, "/")[[1]]
-  resFolder <- folders[length(folders)-1]
+mkDir <- function(fileName) {
+  resFolder <- strsplit(fileName, "_")[[1]][1]
   dir.create(resFolder)
   return(resFolder)
 }
@@ -31,5 +30,5 @@ doIndividualPeakAnalysis <- function(RDSpath, RDSFileNames, resFolder) {
 }
 
 RDSInfo <- getRDSFileNames()
-RDSInfo$resFolder <- mkDir(RDSInfo$path)
+RDSInfo$resFolder <- mkDir(RDSInfo$fileNames[1])
 doIndividualPeakAnalysis(RDSInfo$path, RDSInfo$fileNames, RDSInfo$resFolder)
