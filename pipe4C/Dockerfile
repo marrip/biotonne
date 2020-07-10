@@ -1,4 +1,4 @@
-FROM r-base:3.6.2
+FROM r-base:4.0.2
 # Install git and dependencies
 RUN apt-get update && apt-get install -y git libcurl4-gnutls-dev libxml2-dev libssl-dev bowtie2 samtools
 # Install R packages

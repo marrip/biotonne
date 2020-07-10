@@ -10,6 +10,7 @@ BiocManager::install("ShortRead")
 BiocManager::install("GenomicRanges")
 BiocManager::install("GenomicAlignments")
 BiocManager::install("BSgenome")
+BiocManager::install('BSgenome.Hsapiens.UCSC.hg19')
 
 # Load peakC
 library("devtools")
