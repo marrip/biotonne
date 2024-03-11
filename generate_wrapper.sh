@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define tool list
-TWOR=( fastqc flye guppy lre-finder mlst pocp racon spades unicycler )
+TWOR=( fastqc flye lre-finder mlst pocp racon spades unicycler )
 TWR=( abricate busco kmerfinder kraken prokka quast )
 
 # Define wrapping function
