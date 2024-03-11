@@ -1,5 +1,5 @@
 TOOL=fastqc
 TOOL_NAME="FastQC"
-IMAGE=myskmadra/fastqc
-VERSION=0.11.5
+IMAGE=quay.io/biocontainers/fastqc
+VERSION=0.12.1--hdfd78af_0
 CMD=fastqc
