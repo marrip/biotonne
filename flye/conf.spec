@@ -1,5 +1,5 @@
 TOOL=flye
 TOOL_NAME="Flye assembler"
-IMAGE=myskmadra/flye
-VERSION=2.6
+IMAGE=quay.io/biocontainers/flye
+VERSION=2.9.3--py310h2b6aa90_0
 CMD=flye
