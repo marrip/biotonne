@@ -1,5 +1,5 @@
 TOOL=mlst
 TOOL_NAME="MLST scanner"
-IMAGE=myskmadra/mlst
-VERSION=2.18.0
+IMAGE=quay.io/biocontainers/mlst
+VERSION=2.9--h031d066_5
 CMD=mlst
